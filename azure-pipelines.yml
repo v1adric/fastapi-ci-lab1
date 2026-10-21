@@ -5,26 +5,18 @@ pool:
   name: 'Default'
 
 variables:
-  # Назва створеного Service Connection у Azure DevOps
   dockerRegistryServiceConnection: 'DockerHubConnection'
-  # Логін_DockerHub/Назва_Репозиторію
-  imageRepository: 'vladik2929/fastapi-items-app'
+  imageRepository: '<vladik2929>/fastapi-items-app'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: 'latest'
 
 stages:
-  # Етап 1: Перевірка коду та запуск Unit-тестів
   - stage: Test
     displayName: 'Run Unit Tests'
     jobs:
       - job: Pytest
         displayName: 'Run pytest'
         steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: '3.11'
-            displayName: 'Use Python 3.11'
-
           - script: |
               python -m pip install --upgrade pip
               pip install -r requirements.txt
@@ -34,7 +26,6 @@ stages:
               pytest
             displayName: 'Execute pytest'
 
-  # Етап 2: Збірка Docker-образу та пуш у Docker Hub
   - stage: BuildAndPush
     displayName: 'Build and Push Docker Image'
     dependsOn: Test
