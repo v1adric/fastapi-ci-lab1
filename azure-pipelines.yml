@@ -6,7 +6,7 @@ pool:
 
 variables:
   dockerRegistryServiceConnection: 'DockerHubConnection'
-  imageRepository: '<vladik2929>/fastapi-items-app'
+  imageRepository: 'vladik2929/fastapi-items-app'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: 'latest'
 
